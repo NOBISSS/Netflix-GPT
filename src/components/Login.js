@@ -1,0 +1,59 @@
+import React, { useState } from 'react'
+import Header from './Header'
+
+const Login = () => {
+    const [isSignInForm, setIsSignInForm] = useState(true);
+    const toggleSignInForm = () => {
+        setIsSignInForm(!isSignInForm);
+    }
+    return (
+        <div>
+            <Header />
+            <div className='w-full h-full'>
+                <img src='https://assets.nflxext.com/ffe/siteui/vlv3/37372b0c-16ef-4614-9c66-f0464ffe4136/web/IN-en-20260216-TRIFECTA-perspective_74aa38a5-f527-417e-a604-a039567a350b_medium.jpg'
+                    alt='Netflix BG' />
+            </div>
+            <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black/75 p-10 rounded-sm w-[400px] flex flex-col'>
+                <form className='flex flex-col items-start gap-3'>
+                    <h1 className='text-white font-medium text-4xl'>{isSignInForm ? "Sign In" : "Sign Up"}</h1>
+                    <div className='mt-4'>
+                        {isSignInForm ? null : (
+                            <input
+                            type='text'
+                            placeholder='Full Name'
+                            className='p-2 rounded-sm mb-3 w-full bg-gray-700 text-white' />
+                        )}
+
+                        <input
+                        type='text'
+                        placeholder='Email or phone number'
+                        className='p-2 rounded-sm mb-3 w-full bg-gray-700 text-white' />
+
+                        <input
+                        type='password'
+                        placeholder='Password'
+                        className='p-2 rounded-sm mb-3 w-full bg-gray-700 text-white' />
+
+                    </div>
+                    <button className='bg-[#E50914] text-white py-2 rounded-sm px-6 w-full'>{isSignInForm ? "Sign In" : "Sign Up"}</button>
+                    <div className='flex items-center justify-between w-full mt-3'>
+                        <div className='flex items-center'>
+                            <input type='checkbox' className='mr-2' />
+                            <span className='text-gray-400'>Remember me</span>
+                        </div>
+                        <a href='#' className='text-gray-400'>Need help?</a>
+                    </div>
+                </form>
+                <div className='flex items-start gap-1 mt-10 text-gray-400 cursor-pointer' onClick={toggleSignInForm}>
+                    {isSignInForm ? "New to Netflix? " : "Already have an account? "}
+                    <a href='#' className='text-white'>Sign up now.</a>
+                </div>
+                <div className='text-gray-400 mt-3'>
+                    This page is protected by Google reCAPTCHA to ensure you're not a bot. <a href='#' className='text-white'>Learn more.</a>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export default Login
