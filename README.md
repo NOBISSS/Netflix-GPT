@@ -9,6 +9,8 @@
 - useRef Hook
 - Deploying our app to production
 - Create Signup User Account
+- Implment Sign In user Api
+- Created Redux Store with userSlice
 
 # Features
 - Login/Sign up
