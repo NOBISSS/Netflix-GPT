@@ -1,11 +1,23 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import Header from './Header'
+import { checkValidData } from '../utils/validate';
 
 const Login = () => {
     const [isSignInForm, setIsSignInForm] = useState(true);
+    const [errorMessage,setErrorMessage]=useState("");
+    const fullName=useRef(null);
+    const email=useRef(null);
+    const password=useRef(null);
+
+    const handleButtonClick=()=>{
+        const message=checkValidData(email.current.value,password.current.value);
+        setErrorMessage(message);
+    }
+
     const toggleSignInForm = () => {
         setIsSignInForm(!isSignInForm);
     }
+
     return (
         <div>
             <Header />
@@ -14,28 +26,34 @@ const Login = () => {
                     alt='Netflix BG' />
             </div>
             <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black/75 p-10 rounded-sm w-[400px] flex flex-col'>
-                <form className='flex flex-col items-start gap-3'>
+                <form onSubmit={(e)=>e.preventDefault()} className='flex flex-col items-start gap-3'>
                     <h1 className='text-white font-medium text-4xl'>{isSignInForm ? "Sign In" : "Sign Up"}</h1>
                     <div className='mt-4'>
                         {isSignInForm ? null : (
                             <input
+                            ref={fullName}
                             type='text'
                             placeholder='Full Name'
                             className='p-2 rounded-sm mb-3 w-full bg-gray-700 text-white' />
                         )}
 
                         <input
+                        ref={email}
                         type='text'
                         placeholder='Email or phone number'
                         className='p-2 rounded-sm mb-3 w-full bg-gray-700 text-white' />
 
                         <input
+                        ref={password}
                         type='password'
                         placeholder='Password'
                         className='p-2 rounded-sm mb-3 w-full bg-gray-700 text-white' />
 
                     </div>
-                    <button className='bg-[#E50914] text-white py-2 rounded-sm px-6 w-full'>{isSignInForm ? "Sign In" : "Sign Up"}</button>
+
+                    <p className='ErrorMessage text-red-600'>{errorMessage}</p>
+                    <button onClick={handleButtonClick} className='bg-[#E50914] text-white py-2 rounded-sm px-6 w-full'>{isSignInForm ? "Sign In" : "Sign Up"}</button>
+
                     <div className='flex items-center justify-between w-full mt-3'>
                         <div className='flex items-center'>
                             <input type='checkbox' className='mr-2' />
