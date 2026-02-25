@@ -1,6 +1,9 @@
-import React from 'react'
+import { signOut } from 'firebase/auth';
+import { auth } from '../utils/firebase';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-export const NetflixLogo=()=> {
+export const NetflixLogo = () => {
   return (
     <svg
       viewBox="0 0 111 30"
@@ -13,14 +16,31 @@ export const NetflixLogo=()=> {
 }
 
 const Header = () => {
-    return (
-        <div className=''>
-            <div className='logo absolute m-5 bg-gradient-to-b from-black'>
-                <NetflixLogo/>
-
-            </div>
-        </div>
-    )
+  const user=useSelector((store)=>store.user);
+  console.log("USER",user);
+  const navigate = useNavigate();
+  const handleSignOut = () => {
+    signOut(auth).then(() => {
+      // Sign-out successful.
+      navigate("/");
+    }).catch((error) => {
+      // An error happened.
+      navigate("/error");
+    });
+  }
+  return (
+    <div className='w-full'>
+      <div className='w-full flex justify-between logo absolute m-5 bg-gradient-to-b from-black'>
+        <NetflixLogo />
+        { user &&
+          <div className='w-full flex items-center justify-end gap-10'>
+            <img className='w-12 h-12 ml-4 mt-2' src={user.displayURL}alt='avatar' />
+            <button className='bg-red-600 text-white px-4 py-2 rounded-lg m-4' onClick={handleSignOut}>Sign Out</button>
+          </div>
+        }
+      </div>
+    </div>
+  )
 }
 
 export default Header
