@@ -1,17 +1,52 @@
 import React, { useRef, useState } from 'react'
 import Header from './Header'
 import { checkValidData } from '../utils/validate';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../utils/firebase';
 
 const Login = () => {
     const [isSignInForm, setIsSignInForm] = useState(true);
-    const [errorMessage,setErrorMessage]=useState("");
-    const fullName=useRef(null);
-    const email=useRef(null);
-    const password=useRef(null);
+    const [errorMessage, setErrorMessage] = useState("");
+    const fullName = useRef(null);
+    const email = useRef(null);
+    const password = useRef(null);
 
-    const handleButtonClick=()=>{
-        const message=checkValidData(email.current.value,password.current.value);
+    const handleButtonClick = () => {
+        const message = checkValidData(email.current.value, password.current.value);
         setErrorMessage(message);
+
+        if (message) return;
+
+        if (!isSignInForm) {
+            //Sign Up
+            createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
+                .then((userCredential) => {
+                    // Signed up 
+                    const user = userCredential.user;
+                    console.log("User Object::", user);
+                    // ...
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    setErrorMessage(error.message);
+                    // ..
+                });
+        } else {
+            //Sign In
+            signInWithEmailAndPassword(auth, email.current.value, password.current.value)
+                .then((userCredential) => {
+                    // Signed in 
+                    const user = userCredential.user;
+                    console.log("User SignIn::",user);
+                    // ...
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    setErrorMessage(error.message);
+                });
+        }
     }
 
     const toggleSignInForm = () => {
@@ -26,28 +61,28 @@ const Login = () => {
                     alt='Netflix BG' />
             </div>
             <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black/75 p-10 rounded-sm w-[400px] flex flex-col'>
-                <form onSubmit={(e)=>e.preventDefault()} className='flex flex-col items-start gap-3'>
+                <form onSubmit={(e) => e.preventDefault()} className='flex flex-col items-start gap-3'>
                     <h1 className='text-white font-medium text-4xl'>{isSignInForm ? "Sign In" : "Sign Up"}</h1>
                     <div className='mt-4'>
                         {isSignInForm ? null : (
                             <input
-                            ref={fullName}
-                            type='text'
-                            placeholder='Full Name'
-                            className='p-2 rounded-sm mb-3 w-full bg-gray-700 text-white' />
+                                ref={fullName}
+                                type='text'
+                                placeholder='Full Name'
+                                className='p-2 rounded-sm mb-3 w-full bg-gray-700 text-white' />
                         )}
 
                         <input
-                        ref={email}
-                        type='text'
-                        placeholder='Email or phone number'
-                        className='p-2 rounded-sm mb-3 w-full bg-gray-700 text-white' />
+                            ref={email}
+                            type='text'
+                            placeholder='Email or phone number'
+                            className='p-2 rounded-sm mb-3 w-full bg-gray-700 text-white' />
 
                         <input
-                        ref={password}
-                        type='password'
-                        placeholder='Password'
-                        className='p-2 rounded-sm mb-3 w-full bg-gray-700 text-white' />
+                            ref={password}
+                            type='password'
+                            placeholder='Password'
+                            className='p-2 rounded-sm mb-3 w-full bg-gray-700 text-white' />
 
                     </div>
 
