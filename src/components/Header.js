@@ -35,7 +35,7 @@ const Header = () => {
   }
 
   useEffect(() => {
-          onAuthStateChanged(auth, (user) => {
+          const unSubscribe=onAuthStateChanged(auth, (user) => {
               if (user) {
                   const {uid,email,displayName,photoURL} = user;
                   dispatch(addUser({uid:uid,email:email,displayName:displayName,photoURL:photoURL}));
@@ -45,6 +45,9 @@ const Header = () => {
                   navigate("/");
               }
           });
+
+          // Cleanup subscription on unmount
+          return ()=> unSubscribe();
       }, []);
 
 
@@ -54,7 +57,7 @@ const Header = () => {
         <NetflixLogo />
         { user &&
           <div className='w-full flex items-center justify-end gap-10'>
-            <img className='w-12 h-12 ml-4 mt-2' src={user.displayURL}alt='avatar' />
+            <img className='w-12 h-12 ml-4 mt-2' src={user.photoURL}alt='avatar' />
             <button className='bg-red-600 text-white px-4 py-2 rounded-lg m-4' onClick={handleSignOut}>Sign Out</button>
           </div>
         }
