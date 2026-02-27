@@ -1,15 +1,25 @@
 import React from 'react'
 import Header from './Header'
-import { signOut } from 'firebase/auth'
-import { auth } from '../utils/firebase'
-import { useNavigate } from 'react-router-dom'
+import MainContainer from './MainContainer'
+import SecondaryContainer from './SecondaryContainer'
 
 const Browse = () => {
- 
+
   return (
     <div className='w-full h-full'>
       <Header />
-      
+      <MainContainer />
+      <SecondaryContainer/>
+      {
+        /*
+          MainContainer
+            - VideoBackgorund
+            - VideoTitle
+          SecondaryContainer
+            -MovieList * n
+              - cards * n
+        */
+      }
     </div>
   )
 }

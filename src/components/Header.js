@@ -19,9 +19,7 @@ export const NetflixLogo = () => {
 
 const Header = () => {
 
-
   const user=useSelector((store)=>store.user);
-  console.log("USER",user);
   const navigate = useNavigate();
   const dispatch=useDispatch();
   const handleSignOut = () => {
@@ -53,10 +51,10 @@ const Header = () => {
 
   return (
     <div className='w-full'>
-      <div className='w-full flex justify-between logo absolute m-5 bg-gradient-to-b from-black'>
+      <div className='w-full flex justify-between absolute mx-2 '>
         <NetflixLogo />
         { user &&
-          <div className='w-full flex items-center justify-end gap-10'>
+          <div className='w-full flex items-center justify-end gap-5'>
             <img className='w-12 h-12 ml-4 mt-2' src={user.photoURL}alt='avatar' />
             <button className='bg-red-600 text-white px-4 py-2 rounded-lg m-4' onClick={handleSignOut}>Sign Out</button>
           </div>
