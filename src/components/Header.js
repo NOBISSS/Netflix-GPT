@@ -1,7 +1,9 @@
-import { signOut } from 'firebase/auth';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from '../utils/firebase';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { addUser, removeUser } from '../utils/userSlice';
+import { useEffect } from 'react';
 
 export const NetflixLogo = () => {
   return (
@@ -16,18 +18,36 @@ export const NetflixLogo = () => {
 }
 
 const Header = () => {
+
+
   const user=useSelector((store)=>store.user);
   console.log("USER",user);
   const navigate = useNavigate();
+  const dispatch=useDispatch();
   const handleSignOut = () => {
     signOut(auth).then(() => {
       // Sign-out successful.
-      navigate("/");
+      dispatch(removeUser());
     }).catch((error) => {
       // An error happened.
       navigate("/error");
     });
   }
+
+  useEffect(() => {
+          onAuthStateChanged(auth, (user) => {
+              if (user) {
+                  const {uid,email,displayName,photoURL} = user;
+                  dispatch(addUser({uid:uid,email:email,displayName:displayName,photoURL:photoURL}));
+                  navigate("/browse");
+              } else {
+                  dispatch(removeUser());
+                  navigate("/");
+              }
+          });
+      }, []);
+
+
   return (
     <div className='w-full'>
       <div className='w-full flex justify-between logo absolute m-5 bg-gradient-to-b from-black'>
