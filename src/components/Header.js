@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addUser, removeUser } from '../utils/userSlice';
 import { useEffect } from 'react';
 import { toggleGptSearchView } from '../utils/gptSlice';
+import { SUPPORTED_LANGUAGES } from '../utils/constants';
+import { changeLanguage } from '../utils/configSlice';
 
 export const NetflixLogo = () => {
   return (
@@ -22,6 +24,7 @@ const Header = () => {
   const user = useSelector((store) => store.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const showGptState=useSelector((state)=>state.gpt.showGptState);
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
@@ -46,11 +49,15 @@ const Header = () => {
     return () => unSubscribe();
   }, []);
 
-  const HandleGptClick=(e)=>{
+  const HandleGptClick = (e) => {
     e.preventDefault();
     dispatch(toggleGptSearchView());
   }
 
+  const handleLanguageChange = (e) => {
+    const selectedLanguage = e.target.value;
+    dispatch(changeLanguage(selectedLanguage));
+  }
   return (
     <div className='fixed top-0 left-0 right-0 z-50 bg-gradient-to-b from-black/90 to-transparent'>
       <div className='flex items-center justify-between px-8 py-4'>
@@ -59,7 +66,14 @@ const Header = () => {
 
         {user && (
           <div className='flex items-center gap-4'>
-            <button className='m-2 px-4 py-2 font-semibold bg-fuchsia-300 rounded-full' onClick={(e)=>HandleGptClick(e)}>GPT SEARCH</button>
+            { showGptState && 
+            <select id='language' className='bg-black text-white border border-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500' onChange={handleLanguageChange}>
+              {SUPPORTED_LANGUAGES.map((langOption) => (
+                <option key={langOption.identifier} value={langOption.identifier}>{langOption.label}</option>
+              ))}
+            </select>
+            }
+            <button className='m-2 px-4 py-2 font-semibold bg-fuchsia-300 rounded-full' onClick={(e) => HandleGptClick(e)}>{showGptState ? "Home" : "GPT SEARCH"}</button>
             <img
               className='w-10 h-10 rounded-md object-cover'
               src={user.photoURL}
