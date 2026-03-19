@@ -53,7 +53,7 @@ const Header = () => {
     e.preventDefault();
     dispatch(toggleGptSearchView());
   }
-
+  console.log("API KEY::",process.env.VITE_OPENAI_KEY);
   const handleLanguageChange = (e) => {
     const selectedLanguage = e.target.value;
     dispatch(changeLanguage(selectedLanguage));
