@@ -22,7 +22,6 @@ const Header = () => {
   const user = useSelector((store) => store.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const showGptState=useSelector((state)=>state.gpt.showGptState);
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
