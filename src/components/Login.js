@@ -71,7 +71,9 @@ const Login = () => {
             <Header />
             <div className='w-full h-full'>
                 <img src={BG_URL}
-                    alt='Netflix BG' />
+                    alt='Netflix BG'
+                    className='w-screen h-screen'
+                    />
             </div>
             <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black/75 p-10 rounded-sm w-[400px] flex flex-col'>
                 <form onSubmit={(e) => e.preventDefault()} className='flex flex-col items-start gap-3'>

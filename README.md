@@ -36,7 +36,9 @@
 - GPT SEARCH PAGE
 - Gpt Search Bar
 - Multi-language Feature in App (BONUS FEATURE)
-
+- Displayed Recommended movies in components
+- Stopped API calling again and again by checking store vars
+- TODO:have to implement feature where user can add their own api key
 # Features
 - Login/Sign up
     - Sign In /Sign up Form
