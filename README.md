@@ -43,7 +43,8 @@
 - TODO:have to implement feature where user can add their own api key
 - Fixed Issue Of Slider in MovieList
 - Added Proper Scrolling Feature in MovieList
-
+- Adding Loading (Shimmer UI) to improve user experience
+- TopRated and Upcoming Movies Hooks and Reducers added
 
 # Features
 - Login/Sign up

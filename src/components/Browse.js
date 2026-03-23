@@ -1,4 +1,3 @@
-import React from 'react'
 import Header from './Header'
 import MainContainer from './MainContainer'
 import SecondaryContainer from './SecondaryContainer'
@@ -6,20 +5,25 @@ import useNowPlayingMovies from '../hooks/useNowPlayingMovies'
 import usePopularMovies from '../hooks/usePopularMovies'
 import { useDispatch, useSelector } from 'react-redux'
 import GptSearch from './GptSearch'
+import useTopRatedMovies from '../hooks/useTopRatedMovies'
+import useUpcomingMovies from '../hooks/useUpcomingMovies'
 
 const Browse = () => {
-  const dispatch=useDispatch();
-  const showGptState=useSelector((state)=>state.gpt.showGptState);
+  const dispatch = useDispatch();
+  const showGptState = useSelector((state) => state.gpt.showGptState);
+
   useNowPlayingMovies();
   usePopularMovies();
+  useTopRatedMovies();
+  useUpcomingMovies();
   return (
     <div className='w-full h-full'>
       <Header />
-      { showGptState ? <GptSearch/> : <>
-      <MainContainer />
-      <SecondaryContainer/>
+      {showGptState ? <GptSearch /> : <>
+        <MainContainer />
+        <SecondaryContainer />
       </>
-}
+      }
       {
         /*
           MainContainer

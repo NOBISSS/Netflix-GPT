@@ -1,12 +1,9 @@
 import Login from './Login'
 import Browse from './Browse'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import useNowPlayingMovies from '../hooks/useNowPlayingMovies'
 import GptSearch from './GptSearch'
 
 const Body = () => {
-    useNowPlayingMovies();    
-
     const appRouter = createBrowserRouter([
         {
             path: "/",
