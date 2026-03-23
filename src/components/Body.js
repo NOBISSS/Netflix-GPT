@@ -2,6 +2,7 @@ import Login from './Login'
 import Browse from './Browse'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import GptSearch from './GptSearch'
+import Discover from './Discover'
 
 const Body = () => {
     const appRouter = createBrowserRouter([
@@ -17,6 +18,10 @@ const Body = () => {
             path: "/gpt-search",
             element: <GptSearch />
         },
+        {
+            path:"/discover",
+            element:<Discover/>
+        }
     ]);
 
     return (

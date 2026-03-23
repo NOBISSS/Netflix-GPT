@@ -1,6 +1,6 @@
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from '../utils/firebase';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addUser, removeUser } from '../utils/userSlice';
 import { useEffect } from 'react';
@@ -53,6 +53,7 @@ const Header = () => {
     e.preventDefault();
     dispatch(toggleGptSearchView());
   }
+
   console.log("API KEY::", process.env.VITE_OPENAI_KEY);
   const handleLanguageChange = (e) => {
     const selectedLanguage = e.target.value;
@@ -73,6 +74,9 @@ const Header = () => {
                 ))}
               </select>
             }
+            <Link to="/discover" className="px-4 hover:text-gray-300">
+              Discover
+            </Link>
             <button className='m-2 px-4 py-2 font-semibold bg-fuchsia-300 rounded-full' onClick={(e) => HandleGptClick(e)}>{showGptState ? "Home" : "GPT SEARCH"}</button>
             <img
               className='w-10 h-10 rounded-md object-cover'

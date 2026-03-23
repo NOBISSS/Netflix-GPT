@@ -45,7 +45,7 @@
 - Added Proper Scrolling Feature in MovieList
 - Adding Loading (Shimmer UI) to improve user experience
 - TopRated and Upcoming Movies Hooks and Reducers added
-
+- Discover Feature (Button on Navbar Which Navigate to Page where multiple Movies of Different Categories Shown and search feature also implemented)
 # Features
 - Login/Sign up
     - Sign In /Sign up Form
