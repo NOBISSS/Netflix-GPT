@@ -37,8 +37,14 @@
 - Gpt Search Bar
 - Multi-language Feature in App (BONUS FEATURE)
 - Displayed Recommended movies in components
-- Stopped API calling again and again by checking store vars
+- Stopped API calling again and again by checking store vars (MEMORIZATION)
+- ADDING .ENV
+- MADE PROJECT RESPONSIVE
 - TODO:have to implement feature where user can add their own api key
+- Fixed Issue Of Slider in MovieList
+- Added Proper Scrolling Feature in MovieList
+
+
 # Features
 - Login/Sign up
     - Sign In /Sign up Form

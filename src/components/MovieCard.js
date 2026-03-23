@@ -3,8 +3,11 @@ import { IMG_CDN_URL } from '../utils/constants'
 
 const MovieCard = ({movie}) => {
   return (
-    <div className="w-36 md:w-48 pr-4">
-      <img src={IMG_CDN_URL+movie.poster_path} alt={movie.title} />
+    <div className="w-36 mx-2 md:w-48 flex-shrink-0 transform hover:scale-110 transition duration-300">
+      <img src={IMG_CDN_URL+movie.poster_path} alt={movie.title} 
+      draggable="false"
+      className="pointer-events-none"
+      />
     </div>
   )
 }
