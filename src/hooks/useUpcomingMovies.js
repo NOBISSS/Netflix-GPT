@@ -12,7 +12,7 @@ const useUpcomingMovies = () => {
     const upcomingMovies=useSelector((store)=>store.movies.upcomingMovies);
 
     const getUpcomingMovies = async () => {
-        const data = await fetch(UPCOMING_MOVIES, API_OPTIONS);
+        const data = await fetch("/api/upcoming");
         const json = await data.json();
         dispatch(addUpcomingMovies(json.results));
     }

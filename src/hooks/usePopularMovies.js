@@ -11,7 +11,7 @@ const usePopularMovies = () => {
 
     const popularMovies=useSelector((store)=>store.movies.popularMovies);
     const getPopularMovies = async () => {
-        const data = await fetch(POPULAR_MOVIES, API_OPTIONS);
+        const data = await fetch("/api/popular");
         const json = await data.json();
         dispatch(addPopularMovies(json.results));
     }
