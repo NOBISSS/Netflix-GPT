@@ -1,11 +1,11 @@
 export default async function handler(req,res){
-    const {movieId}=req.body;
+    const {movieId}=req.query;
     try{
         const response=await fetch(
             `https://api.themoviedb.org/3/movie/${movieId}/videos`,
             {
                 headers:{
-                    Authorization:`Bearer ${process.env.REACT_APP_TMDB_ACCESS_TOKEN}`,
+                    Authorization:`Bearer ${process.env.TMDB_TOKEN}`,
                     "Content-Type":"application/json",
                 },
             }
