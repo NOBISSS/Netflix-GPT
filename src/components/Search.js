@@ -32,7 +32,7 @@ const Search = () => {
       </div>
 
       <div className="flex flex-wrap gap-4">
-        {results.map((movie) => (
+        {results.length >0 && results.map((movie) => (
           <MovieCard key={movie.id} movie={movie} />
         ))}
       </div>
