@@ -1,7 +1,7 @@
 export default async function handler(req, res) {
   try {
     const response = await fetch(
-      "https://api.themoviedb.org/3/movie/top_rated",
+      "https://api.themoviedb.org/3/movie/top_rated?page=1",
       {
         headers: {
           Authorization: `Bearer ${process.env.TMDB_TOKEN}`,
